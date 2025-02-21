@@ -285,7 +285,7 @@ class SunoApi {
     const page = await browser.newPage();
     await page.goto('https://suno.com/create', { referer: 'https://www.google.com/', waitUntil: 'domcontentloaded', timeout: 0 });
 
-    logger.info('Waiting for Suno interface to load');
+    logger.info('Waiting for Suno interface to load (300 seconds)');
     // await page.locator('.react-aria-GridList').waitFor({ timeout: 60000 });
     await page.waitForResponse('**/api/project/**\\?**', { timeout: 300000 }); // wait for song list API call
 
