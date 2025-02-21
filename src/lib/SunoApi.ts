@@ -288,9 +288,8 @@ class SunoApi {
     logger.info('Waiting for Suno interface to load (300 seconds)');
     // await page.locator('.react-aria-GridList').waitFor({ timeout: 60000 });
     await Promise.race([
-      page.waitForResponse('**/api/project/**\\?**'),
-      page.waitForSelector('.react-aria-GridList'),
-      page.waitForLoadState('networkidle')
+      page.waitForResponse('**/api/project/**\\?**', { timeout: 60000 }),
+      page.waitForSelector('.react-aria-GridList', { timeout: 60000 })
     ]);
 
     if (this.ghostCursorEnabled)
