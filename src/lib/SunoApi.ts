@@ -287,7 +287,7 @@ class SunoApi {
 
     logger.info('Waiting for Suno interface to load');
     // await page.locator('.react-aria-GridList').waitFor({ timeout: 60000 });
-    await page.waitForResponse('**/api/project/**\\?**', { timeout: 60000 }); // wait for song list API call
+    await page.waitForResponse('**/api/project/**\\?**', { timeout: 300000 }); // wait for song list API call
 
     if (this.ghostCursorEnabled)
       this.cursor = await createCursor(page);
