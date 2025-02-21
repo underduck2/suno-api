@@ -286,9 +286,13 @@ class SunoApi {
     await page.goto('https://suno.com/create', { referer: 'https://www.google.com/', waitUntil: 'domcontentloaded', timeout: 0 });
 
     logger.info('Waiting for Suno interface to load (300 seconds)');
-    // await page.locator('.react-aria-GridList').waitFor({ timeout: 60000 });
-    await page.waitForResponse('**/api/project/**\\?**', { timeout: 300000 }); // wait for song list API call
 
+    
+    await Promise.race([
+      page.waitForResponse('**/api/project/**\\?**'),
+      page.waitForSelector('.react-aria-GridList'),
+      page.waitForLoadState('networkidle')
+    ]);
     if (this.ghostCursorEnabled)
       this.cursor = await createCursor(page);
     
